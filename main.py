@@ -55,31 +55,32 @@ def chinese_zodiac():
 
 def process_input(data):
     try:
+        print("Целое число")
         a = int(data)
         return sum(int(digit) for digit in str(data) if int(digit) % 2 != 0)
-    except Exception:
-        print("\b")
-    if isinstance(data, str):
+    except ValueError:
+        pass
 
+    if isinstance(data, str):
         if data.startswith('[') and data.endswith(']'):
             data = ast.literal_eval(data)
         elif data.startswith('(') and data.endswith(')'):
             data = ast.literal_eval(data)
     if isinstance(data, list):
-        print("list")
+        print("Список")
         filtered_list = [x for x in data if x >= 0]
         if 0 in filtered_list:
             zero_index = filtered_list.index(0)
             return sum(filtered_list[zero_index + 1:])
         return 0
     elif isinstance(data, tuple):
-        print("tuple")
+        print("Кортеж")
         max_elem = max(data)
         min_elem = min(data)
         new_tuple = tuple(min_elem if x == max_elem else max_elem if x == min_elem else x for x in data)
         return new_tuple
     elif isinstance(data, str):
-        print("str")
+        print("Строка")
         words = data.split()
         even_length_count = sum(1 for word in words if len(word) % 2 == 0)
         return even_length_count
@@ -138,5 +139,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-print("Hello Zheka")
